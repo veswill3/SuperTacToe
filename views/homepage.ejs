@@ -1,0 +1,28 @@
+
+
+<table>
+    <tbody>
+        <% for(var i=0; i<3; i++) { %>
+           <tr>
+               <% for(var j=0; j<3; j++) { %>
+                   <td class="bigTile">
+                       <table>
+                           <tbody>
+                               <% for(var k=0; k<3; k++) { %>
+                                   <tr>
+                                       <% for(var l=0; l<3; l++) { %>
+                                           <td class="smallTile">
+                                               <button id="<%= ("" + i + j + k + l) %>" type="button" class="btn btn-default bTile"></button>
+                                           </td>
+                                       <% } %>
+                                   </tr>
+                               <% } %>
+                           </tbody>
+                       </table>
+                   </td>
+               <% } %>
+           </tr>
+        <% } %>
+    </tbody>
+</table>
+<button id="resetBoard" type="button" class="btn btn-default">Reset Board</button>

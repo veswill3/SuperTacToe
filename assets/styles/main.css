@@ -1,0 +1,12 @@
+.bigTile {
+    border: 2px solid black;
+}
+
+.bTile {
+    width: 40px;
+    height: 40px;
+}
+
+#resetBoard {
+    margin: 5px;
+}
