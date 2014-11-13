@@ -45,7 +45,7 @@ var cellClick = function() {
     
     
     // Get all elements from current sub-game
-    var elements = elementsFromGame(element)
+    var elements = elementsFromGame(element);
     
     // Translate into values
     elements = elements.map(function(e) {
@@ -59,8 +59,15 @@ var cellClick = function() {
     if (result) {
         //
         alert('player' + player + ' won small game');
-        // If necessary, evaluate overall board
         
+        // change appropriate bigTile td to reflect win
+        // TODO: Determine how big board will show winner
+        //$('.'+element.slice(0,2)).
+        
+        // If necessary, evaluate overall board
+	var bigBoard = elementsFromGame("");
+	
+	
         // If necessary, remove tiles and replace with bigger tile
     }
     
@@ -82,11 +89,13 @@ var cellClick = function() {
 // Given one element (the id of the HTML elmeent), return rest of
 // elements from game as an arry
 var elementsFromGame = function(element) {
-    var base = element.slice(0,2);
+    var base = "";
+    if (element)
+    	base = element.slice(0,2);
     var elements = []
     for (var i =0; i < 3; i++) {
         for (var j = 0; j < 3; j++) {
-            elements.push(base+i+j)
+            elements.push(base+i+j);
         }
     }
     return elements;
