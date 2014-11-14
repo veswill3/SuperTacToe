@@ -13,6 +13,10 @@ $(document).ready(function() {
 
 var resetClick = function() {
     player = 1;
+    //CWS - let's try this instead
+    $('.bTile').removeAttr('disabled');
+    $('.bTile').text('');
+    /*
     var element = "";
     for (var i = 0; i < 3; i++) {
         for (var j = 0; j < 3; j++) {
@@ -24,7 +28,7 @@ var resetClick = function() {
                 }
             }
         }
-     }
+     }*/
     
 }
 
