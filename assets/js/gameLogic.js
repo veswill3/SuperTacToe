@@ -13,6 +13,7 @@ $(document).ready(function() {
 
 var resetClick = function() {
     player = 1; // reset the player
+    $('#player').text(player);
     $('.bTile').removeAttr('disabled'); // un-disable the buttons
     $('.bTile').text(''); // remove the text
 }
@@ -82,7 +83,7 @@ var cellClick = function() {
     else
         player = 1;
 
-    
+    $('#player').text(player);
 }
 
 // Given one element (the id of the HTML elmeent), return rest of
