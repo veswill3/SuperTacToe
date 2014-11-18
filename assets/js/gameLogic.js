@@ -70,6 +70,7 @@ var cellClick = function() {
 			});
 			
 		var bigResult = evalGame(bigBoard);
+		}
     
     // Determine new sub-game
     var nextGame = elementId.slice(2,4);
