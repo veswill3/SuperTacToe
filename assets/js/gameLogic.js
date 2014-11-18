@@ -12,24 +12,9 @@ $(document).ready(function() {
 });
 
 var resetClick = function() {
-    player = 1;
-    //CWS - let's try this instead
-    $('.bTile').removeAttr('disabled');
-    $('.bTile').text('');
-    /*
-    var element = "";
-    for (var i = 0; i < 3; i++) {
-        for (var j = 0; j < 3; j++) {
-            for (var k = 0; k < 3; k++) {
-                for (var l = 0; l < 3; l++) {
-                    element = $('#'+i+j+k+l);
-                    element.removeAttr('disabled');
-                    element.text('');
-                }
-            }
-        }
-     }*/
-    
+    player = 1; // reset the player
+    $('.bTile').removeAttr('disabled'); // un-disable the buttons
+    $('.bTile').text(''); // remove the text
 }
 
 
