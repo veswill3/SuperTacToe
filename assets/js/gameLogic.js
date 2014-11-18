@@ -72,7 +72,7 @@ var cellClick = function() {
     
     // Determine new sub-game
     
-    // If necssary (not a completed board) deactivate tiles
+    // If necessary (not a completed board) deactivate tiles
     
     // Re-activate new tiles (all or just new sub-game)
     
