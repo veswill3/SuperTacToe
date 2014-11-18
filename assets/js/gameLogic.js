@@ -17,19 +17,19 @@ var resetClick = function() {
 var cellClick = function() {
     
     // Get current element id
-    var element = this.id;
+    var elementId = this.id;
     
     // disable the button
-    $('#'+element).attr('disabled',1);
+    $('#'+elementId).attr('disabled',1);
     
     // Change the underscore to a X or O
     if (player == 1)
-        $('#'+element).html('X');
+        $('#'+elementId).html('X');
     else
-        $('#'+element).html('O');
+        $('#'+elementId).html('O');
     
     // Get all elements from current sub-game
-    var elements = elementsFromGame(element);
+    var elements = elementsFromGame(elementId);
     
     // Translate into values
     elements = elements.map(function(e) {
@@ -39,34 +39,41 @@ var cellClick = function() {
     // Evaluate Game
     var result = evalGame(elements);
     
+	var bigTileId = elementId.slice(0,2);
+	
     // If someone won
     if (result) {
         //
-        alert('player' + player + ' won small game. bigTilePrefix: ' + element.slice(0,2));
-        // retain this info by adding a class indicating who won the small game (AKA big tile)
-        var bigTilePrefix = element.slice(0,2);
-        $('#' + bigTilePrefix).addClass('Won');
-        $('#' + bigTilePrefix).addClass('WonByPlayer' + player);
-
-        for (var k = 0; k < 3; k++) {
-            for (var l = 0; l < 3; l++) {
-                $('#' + bigTilePrefix + k + l).attr('disabled',1);
-            };
-        };
+        alert('player' + player + ' won small game. bigTileId: ' + elementId.slice(0,2));
+		
+		// Mark Small Tile with winner
+		$('#' + elementId).addClass('Won');
+        $('#' + elementId).addClass('WonByPlayer' + player);
         
-        // change appropriate bigTile td to reflect win
+		// Mark Big Tile with winner
+        $('#' + bigTileId).addClass('Won');
+        $('#' + bigTileId).addClass('WonByPlayer' + player);
+        disableBoard(bigTileId);
+		
+
         // TODO: Determine how big board will show winner
-        //$('.'+element.slice(0,2)).
+        // If necessary, remove tiles and replace with bigger tile
+		
         
         // If necessary, evaluate overall board
-	var bigBoard = elementsFromGame("");
-	
-	
-        // If necessary, remove tiles and replace with bigger tile
-    }
+		var bigBoard = elementsFromGame("").filter(function(data) {
+			if ($('.' + data).hasClass('won')) {
+					// This isn't quite right, yet. We need to return a 1 or 2 for the player who won
+					// rather than just the board with the winners on it.
+					return data
+				}
+			});
+			
+		var bigResult = evalGame(bigBoard);
     
     // Determine new sub-game
-    
+    var nextGame = elementId.slice(2,4);
+	
     // If necessary (not a completed board) deactivate tiles
     
     // Re-activate new tiles (all or just new sub-game)
@@ -109,4 +116,12 @@ var compareThree = function(one,two,three) {
     if (!one || !two || !three)
         return "";
     return one == two && two == three;
+};
+
+var disableBoard = function(board) {
+    for (var k = 0; k < 3; k++) {
+        for (var l = 0; l < 3; l++) {
+            $('#' + board + k + l).attr('disabled',1);
+        };
+    };
 };
