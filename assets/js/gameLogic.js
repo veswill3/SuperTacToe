@@ -47,7 +47,17 @@ var cellClick = function() {
     // If someone won
     if (result) {
         //
-        alert('player' + player + ' won small game');
+        alert('player' + player + ' won small game. bigTilePrefix: ' + element.slice(0,2));
+        // retain this info by adding a class indicating who won the small game (AKA big tile)
+        var bigTilePrefix = element.slice(0,2);
+        $('#' + bigTilePrefix).addClass('Won');
+        $('#' + bigTilePrefix).addClass('WonByPlayer' + player);
+
+        for (var k = 0; k < 3; k++) {
+            for (var l = 0; l < 3; l++) {
+                $('#' + bigTilePrefix + k + l).attr('disabled',1);
+            };
+        };
         
         // change appropriate bigTile td to reflect win
         // TODO: Determine how big board will show winner
