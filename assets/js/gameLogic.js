@@ -1,10 +1,11 @@
 var player = 1
+var winner = 0
 
 $(document).ready(function() {
-	// tile clicked
-	$('.SmallTile').click(cellClick);
-	// reset clicked
-	$('#resetBoard').click(resetClick);
+    // tile clicked
+    $('.SmallTile').click(cellClick);
+    // reset clicked
+    $('#resetBoard').click(resetClick);
 
     $('#playRandom').click(function() {
         resetClick();
@@ -13,6 +14,7 @@ $(document).ready(function() {
 });
 
 var resetClick = function() {
+    winner = 0;
     player = 1; // reset the player
     $('#player').text(player);
     $('.SmallTile').removeAttr('disabled').text(''); // un-disable the buttons, remove text
@@ -31,26 +33,27 @@ var cellClick = function() {
     $('#'+elementId).attr('disabled',1);
     
     // Change the underscore to a X or O
-    $('#' + elementId).html(player === 1 ? 'X' : 'O').addClass('WonByPlayer' + player);
+    $('#' + elementId).html(player === 1 ? 'X' : 'O').addClass('Won').addClass('WonByPlayer' + player);
     
-    // Get all elements from current sub-game
-    var elements = elementsFromGame(elementId);
-    
-    // Translate into values
-    elements = elements.map(function(e) {
-        return $('#'+e).text();
-    })
+    var result = 0;
+    var bigTileId = elementId.slice(0,2);
+    if (!($('#' + bigTileId).hasClass('Won'))) {
+        // Get all elements from current sub-game
+        var elements = elementsFromGame(elementId);
+        
+        // Translate into values
+        elements = elements.map(function(e) {
+            return $('#'+e).text();
+        })
+        // Evaluate Game
+        result = evalGame(elements);
+    };
 
-    // Evaluate Game
-    var result = evalGame(elements);
-    
-	var bigTileId = elementId.slice(0,2);
-	
     // If someone won
     if (result) {
-		// Mark Big Tile with winner
-        $('#' + bigTileId).addClass('Won');
-        $('#' + bigTileId).addClass('WonByPlayer' + player);
+        
+        // Mark Big Tile with winner
+        $('#' + bigTileId).addClass('Won').addClass('WonByPlayer' + player);
         // disable all buttons in the big tile
         disableBoard(bigTileId);
         // remove other players winning marks
@@ -59,35 +62,43 @@ var cellClick = function() {
         $('#' + bigTileId + ' button').addClass('WonByPlayer' + player);
         
         // If necessary, evaluate overall board
-		var bigBoard = elementsFromGame("").map(function(data) {
-			if ($('#' + data).hasClass('Won')) {
-					if ($('#' + data).hasClass('WonByPlayer1'))
-						return 1;
-					else {return 2;}
-				}
-			return "";
-			});
-			
-		var bigResult = evalGame(bigBoard);
-		if (bigResult) {
-			console.log('Big Result');
-			console.log(bigResult);
-		}
-	}
-    
+        var bigBoard = elementsFromGame("").map(function(data) {
+            if ($('#' + data).hasClass('Won')) {
+                    if ($('#' + data).hasClass('WonByPlayer1'))
+                        return 1;
+                    else {return 2;}
+                }
+            return "";
+            });
+            
+        var bigResult = evalGame(bigBoard);
+        if (bigResult) {
+            winner = player;
+            alert('Player ' + bigResult + ' wins!');
+        }
+    }
+
+    // Update the rest of the board for the opponents turn
+    // disable the entire board
+    $('#gameboard button').attr('disabled',1);
+
     // Determine new sub-game
     var nextGame = elementId.slice(2,4);
-	
-	if ($('#' + nextGame).hasClass('Won')) { // enable all remaining boards
-	
-	}
-	else {  //just enable this board
-		enableBoard(nextGame);
-	}
-	
-    // If necessary (not a completed board) deactivate tiles
     
-    // Re-activate new tiles (all or just new sub-game)
+    // Did player send their opponent to an already won board?
+    if ($('#' + nextGame).hasClass('Won')) {
+        // enable all boards
+        jQuery.each($('#gameboard .BigTile'),function(i,val) {
+            enableBoard(val.id)
+        });
+    } else if ($('#' + nextGame + ' .Won').length === 9) {
+        // Did player send their opponent to a full board?
+        jQuery.each($('#gameboard .BigTile'),function(i,val) {
+            enableBoard(val.id)
+        });
+    } else {  //just enable this board
+        enableBoard(nextGame);
+    }
     
     // Switch player
     if (player == 1)
@@ -103,7 +114,7 @@ var cellClick = function() {
 var elementsFromGame = function(element) {
     var base = "";
     if (element)
-    	base = element.slice(0,2);
+        base = element.slice(0,2);
     var elements = []
     for (var i =0; i < 3; i++) {
         for (var j = 0; j < 3; j++) {
@@ -136,9 +147,8 @@ var compareThree = function(one,two,three) {
 
 // Takes in board id as string and enables all available buttons underneath
 var enableBoard = function(board) {
-	var list = jQuery.each($('#' + board + ' button'),function(i,val) {
-		if (!$('#'+val.id).html())
-			$('#'+val.id).removeAttr('disabled');
-	});
+    var list = jQuery.each($('#' + board + ' button'),function(i,val) {
+        if (!$('#'+val.id).html())
+            $('#'+val.id).removeAttr('disabled');
+    });
 }
-	

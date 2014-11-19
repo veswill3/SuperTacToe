@@ -21,6 +21,8 @@
 .WonByPlayer1[disabled] { background-color: blue; }
 .WonByPlayer2[disabled] { background-color: red; }
 
+.btn-default[disabled] { background-color: gray; }
+
 #resetBoard {
   margin: 5px;
 }
