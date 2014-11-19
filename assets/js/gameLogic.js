@@ -71,13 +71,21 @@ var cellClick = function() {
 			});
 			
 		var bigResult = evalGame(bigBoard);
-		if (bigResult)
+		if (bigResult) {
 			console.log('Big Result');
 			console.log(bigResult);
+		}
 	}
     
     // Determine new sub-game
     var nextGame = elementId.slice(2,4);
+	
+	if ($('#' + nextGame).hasClass('Won')) { // enable all remaining boards
+	
+	}
+	else {  //just enable this board
+	
+	}
 	
     // If necessary (not a completed board) deactivate tiles
     
@@ -124,9 +132,13 @@ var compareThree = function(one,two,three) {
 };
 
 var disableBoard = function(board) {
-    for (var k = 0; k < 3; k++) {
-        for (var l = 0; l < 3; l++) {
-            $('#' + board + k + l).attr('disabled',1);
-        };
-    };
+	$('#' + board + ' button').attr('disabled',1);
 };
+
+var enableBoard = function(board) {
+	var list = jQuery.each($('#' + board + ' button'),function(i,val) {
+		if (!$('#'+val.id).html())
+			$('#'+val.id).removeAttr('disabled');
+	});
+}
+	
