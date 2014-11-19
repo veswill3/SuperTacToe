@@ -1,35 +1,27 @@
 
 <div class="container">
-	<div class="row col-md-offset-2"><h1>SuperTacToe</h1></div>
-	<div class="row col-md-offset-2">
-		<table>
-			<tbody>
-				<% for(var i=0; i<3; i++) { %>
-				   <tr>
-					   <% for(var j=0; j<3; j++) { %>
-						   <td class="bigTile">
-							   <table id="<%= "" + i + j %>">
-								   <tbody>
-									   <% for(var k=0; k<3; k++) { %>
-										   <tr>
-											   <% for(var l=0; l<3; l++) { %>
-												   <td class="smallTile">
-													   <button id="<%= ("" + i + j + k + l) %>" type="button" class="btn btn-default bTile"></button>
-												   </td>
-											   <% } %>
-										   </tr>
-									   <% } %>
-								   </tbody>
-							   </table>
-						   </td>
-					   <% } %>
-				   </tr>
-				<% } %>
-			</tbody>
-		</table>
-	</div>
-	<div class="row">
-		<div class="h2 col-md-2 col-md-offset-2 col-xs-2"><button id="resetBoard" type="button" class="btn btn-default">Reset Board</button></div>
-		<div class="col-md-3 col-xs-3 h2"> Player: <span id="player">1</span> </div>
-	</div>
+  <div class="row col-md-offset-2"><h1>SuperTacToe</h1></div>
+  <div class="row col-md-offset-2">
+    <div id="gameboard">
+      <% for(var i=0; i<3; i++) { %>
+        <div id="<%= i %>" class="BigRow">
+          <% for(var j=0; j<3; j++) { %>
+            <div id="<%= "" + i + j %>" class="BigTile">
+              <% for(var k=0; k<3; k++) { %>
+                <div id="<%= k %>" class="SmallRow">
+                  <% for(var l=0; l<3; l++) { %>
+                    <button id="<%= ("" + i + j + k + l) %>" type="button" class="btn btn-default SmallTile"></button>
+                  <% } %>
+                </div>
+              <% } %>
+            </div>
+          <% } %>
+        </div>
+      <% } %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="h2 col-md-2 col-md-offset-2 col-xs-2"><button id="resetBoard" type="button" class="btn btn-default">Reset Board</button></div>
+    <div class="col-md-3 col-xs-3 h2"> Player: <span id="player">1</span> </div>
+  </div>
 </div>

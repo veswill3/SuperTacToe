@@ -1,12 +1,20 @@
-.bigTile {
-    border: 2px solid black;
+.BigRow {
+  display: flex;
 }
 
-.bTile {
-    width: 40px;
-    height: 40px;
+.BigTile {
+  border: 2px solid black;
+}
+
+.SmallRow {
+  display: flex;
+}
+
+.SmallTile {
+  width: 40px;
+  height: 40px;
 }
 
 #resetBoard {
-    margin: 5px;
+  margin: 5px;
 }

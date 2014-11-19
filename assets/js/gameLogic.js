@@ -2,7 +2,7 @@ var player = 1
 
 $(document).ready(function() {
 	// tile clicked
-	$('.bTile').click(cellClick);
+	$('.SmallTile').click(cellClick);
 	// reset clicked
 	$('#resetBoard').click(resetClick);
 });
@@ -10,8 +10,8 @@ $(document).ready(function() {
 var resetClick = function() {
     player = 1; // reset the player
     $('#player').text(player);
-    $('.bTile').removeAttr('disabled'); // un-disable the buttons
-    $('.bTile').text(''); // remove the text
+    $('.SmallTile').removeAttr('disabled'); // un-disable the buttons
+    $('.SmallTile').text(''); // remove the text
 }
 
 var cellClick = function() {
