@@ -10,8 +10,9 @@ $(document).ready(function() {
 var resetClick = function() {
     player = 1; // reset the player
     $('#player').text(player);
-    $('.SmallTile').removeAttr('disabled'); // un-disable the buttons
-    $('.SmallTile').text(''); // remove the text
+    $('.SmallTile').removeAttr('disabled').text(''); // un-disable the buttons, remove text
+    // clear who won what
+    $('.Won').removeClass('Won').removeClass('WonByPlayer1').removeClass('WonByPlayer2');
 }
 
 var cellClick = function() {
@@ -43,22 +44,10 @@ var cellClick = function() {
 	
     // If someone won
     if (result) {
-        //
-        //alert('player' + player + ' won small game. bigTileId: ' + elementId.slice(0,2));
-		
-		// Mark Small Tile with winner
-		$('#' + elementId).addClass('Won');
-        $('#' + elementId).addClass('WonByPlayer' + player);
-        
 		// Mark Big Tile with winner
         $('#' + bigTileId).addClass('Won');
         $('#' + bigTileId).addClass('WonByPlayer' + player);
         disableBoard(bigTileId);
-		
-
-        // TODO: Determine how big board will show winner
-        // If necessary, remove tiles and replace with bigger tile
-		
         
         // If necessary, evaluate overall board
 		var bigBoard = elementsFromGame("").filter(function(data) {
