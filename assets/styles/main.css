@@ -16,8 +16,10 @@
 }
 
 .WonByPlayer1 { background-color: blue; }
-
 .WonByPlayer2 { background-color: red; }
+
+.WonByPlayer1[disabled] { background-color: blue; }
+.WonByPlayer2[disabled] { background-color: red; }
 
 #resetBoard {
   margin: 5px;

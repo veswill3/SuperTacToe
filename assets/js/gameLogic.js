@@ -5,6 +5,11 @@ $(document).ready(function() {
 	$('.SmallTile').click(cellClick);
 	// reset clicked
 	$('#resetBoard').click(resetClick);
+
+    $('#playRandom').click(function() {
+        resetClick();
+        playRandomGame();
+    });
 });
 
 var resetClick = function() {
@@ -12,7 +17,9 @@ var resetClick = function() {
     $('#player').text(player);
     $('.SmallTile').removeAttr('disabled').text(''); // un-disable the buttons, remove text
     // clear who won what
-    $('.Won').removeClass('Won').removeClass('WonByPlayer1').removeClass('WonByPlayer2');
+    $('.Won').removeClass('Won');
+    $('.WonByPlayer1').removeClass('WonByPlayer1');
+    $('.WonByPlayer2').removeClass('WonByPlayer2');
 }
 
 var cellClick = function() {
@@ -24,10 +31,7 @@ var cellClick = function() {
     $('#'+elementId).attr('disabled',1);
     
     // Change the underscore to a X or O
-    if (player == 1)
-        $('#'+elementId).html('X');
-    else
-        $('#'+elementId).html('O');
+    $('#' + elementId).html(player === 1 ? 'X' : 'O').addClass('WonByPlayer' + player);
     
     // Get all elements from current sub-game
     var elements = elementsFromGame(elementId);
@@ -47,7 +51,12 @@ var cellClick = function() {
 		// Mark Big Tile with winner
         $('#' + bigTileId).addClass('Won');
         $('#' + bigTileId).addClass('WonByPlayer' + player);
-        disableBoard(bigTileId);
+        // disable all buttons in the big tile
+        $('#' + bigTileId + ' button').attr('disabled',1);
+        // remove other players winning marks
+        $('#' + bigTileId + ' button').removeClass('WonByPlayer' + (player === 1 ? 2 : 1));
+        // mark all tiles in this big tile as belonging to the current player
+        $('#' + bigTileId + ' button').addClass('WonByPlayer' + player);
         
         // If necessary, evaluate overall board
 		var bigBoard = elementsFromGame("").map(function(data) {
@@ -118,10 +127,6 @@ var compareThree = function(one,two,three) {
     if (!one || !two || !three)
         return "";
     return one == two && two == three;
-};
-
-var disableBoard = function(board) {
-	$('#' + board + ' button').attr('disabled',1);
 };
 
 var enableBoard = function(board) {
