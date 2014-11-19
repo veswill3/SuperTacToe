@@ -82,7 +82,7 @@ var cellClick = function() {
 	
 	}
 	else {  //just enable this board
-	
+		enableBoard(nextGame);
 	}
 	
     // If necessary (not a completed board) deactivate tiles
@@ -129,6 +129,7 @@ var compareThree = function(one,two,three) {
     return one == two && two == three;
 };
 
+// Takes in board id as string and enables all available buttons underneath
 var enableBoard = function(board) {
 	var list = jQuery.each($('#' + board + ' button'),function(i,val) {
 		if (!$('#'+val.id).html())
