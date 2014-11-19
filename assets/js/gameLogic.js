@@ -52,7 +52,7 @@ var cellClick = function() {
         $('#' + bigTileId).addClass('Won');
         $('#' + bigTileId).addClass('WonByPlayer' + player);
         // disable all buttons in the big tile
-        $('#' + bigTileId + ' button').attr('disabled',1);
+        disableBoard(bigTileId);
         // remove other players winning marks
         $('#' + bigTileId + ' button').removeClass('WonByPlayer' + (player === 1 ? 2 : 1));
         // mark all tiles in this big tile as belonging to the current player
@@ -128,6 +128,11 @@ var compareThree = function(one,two,three) {
         return "";
     return one == two && two == three;
 };
+
+// Takes in board id as string and disables all buttons underneath
+ var disableBoard = function(board) {
+    $('#' + board + ' button').attr('disabled',1);
+ };
 
 // Takes in board id as string and enables all available buttons underneath
 var enableBoard = function(board) {
