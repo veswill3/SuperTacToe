@@ -61,16 +61,20 @@ var cellClick = function() {
 		
         
         // If necessary, evaluate overall board
-		var bigBoard = elementsFromGame("").filter(function(data) {
-			if ($('.' + data).hasClass('won')) {
-					// This isn't quite right, yet. We need to return a 1 or 2 for the player who won
-					// rather than just the board with the winners on it.
-					return data
+		var bigBoard = elementsFromGame("").map(function(data) {
+			if ($('#' + data).hasClass('Won')) {
+					if ($('#' + data).hasClass('WonByPlayer1'))
+						return 1;
+					else {return 2;}
 				}
+			return "";
 			});
 			
 		var bigResult = evalGame(bigBoard);
-		}
+		if (bigResult)
+			console.log('Big Result');
+			console.log(bigResult);
+	}
     
     // Determine new sub-game
     var nextGame = elementId.slice(2,4);
