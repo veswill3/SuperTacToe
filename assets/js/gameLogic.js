@@ -50,19 +50,31 @@ var cellClick = function() {
         disableBoard(bigTileId);
         
         // If necessary, evaluate overall board
-		var bigBoard = elementsFromGame("").filter(function(data) {
-			if ($('.' + data).hasClass('won')) {
-					// This isn't quite right, yet. We need to return a 1 or 2 for the player who won
-					// rather than just the board with the winners on it.
-					return data
+		var bigBoard = elementsFromGame("").map(function(data) {
+			if ($('#' + data).hasClass('Won')) {
+					if ($('#' + data).hasClass('WonByPlayer1'))
+						return 1;
+					else {return 2;}
 				}
+			return "";
 			});
 			
 		var bigResult = evalGame(bigBoard);
+		if (bigResult) {
+			console.log('Big Result');
+			console.log(bigResult);
 		}
+	}
     
     // Determine new sub-game
     var nextGame = elementId.slice(2,4);
+	
+	if ($('#' + nextGame).hasClass('Won')) { // enable all remaining boards
+	
+	}
+	else {  //just enable this board
+	
+	}
 	
     // If necessary (not a completed board) deactivate tiles
     
@@ -109,9 +121,13 @@ var compareThree = function(one,two,three) {
 };
 
 var disableBoard = function(board) {
-    for (var k = 0; k < 3; k++) {
-        for (var l = 0; l < 3; l++) {
-            $('#' + board + k + l).attr('disabled',1);
-        };
-    };
+	$('#' + board + ' button').attr('disabled',1);
 };
+
+var enableBoard = function(board) {
+	var list = jQuery.each($('#' + board + ' button'),function(i,val) {
+		if (!$('#'+val.id).html())
+			$('#'+val.id).removeAttr('disabled');
+	});
+}
+	
