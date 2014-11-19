@@ -44,7 +44,7 @@ var cellClick = function() {
     // If someone won
     if (result) {
         //
-        alert('player' + player + ' won small game. bigTileId: ' + elementId.slice(0,2));
+        //alert('player' + player + ' won small game. bigTileId: ' + elementId.slice(0,2));
 		
 		// Mark Small Tile with winner
 		$('#' + elementId).addClass('Won');
