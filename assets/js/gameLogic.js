@@ -22,6 +22,8 @@ var resetClick = function() {
     $('.Won').removeClass('Won');
     $('.WonByPlayer1').removeClass('WonByPlayer1');
     $('.WonByPlayer2').removeClass('WonByPlayer2');
+	$('.WonByPlayer2').removeClass('player2');
+	$('.WonByPlayer2').removeClass('player2');
 }
 
 var cellClick = function() {
@@ -33,7 +35,7 @@ var cellClick = function() {
     $('#'+elementId).attr('disabled',1);
     
     // Change the underscore to a X or O
-    $('#' + elementId).html(player === 1 ? 'X' : 'O').addClass('Won').addClass('WonByPlayer' + player);
+    $('#' + elementId).html(player === 1 ? 'X' : 'O').addClass('player'+player)//.addClass('WonByPlayer' + player);
     
     var result = 0;
     var bigTileId = elementId.slice(0,2);
@@ -53,13 +55,13 @@ var cellClick = function() {
     if (result) {
         
         // Mark Big Tile with winner
-        $('#' + bigTileId).addClass('Won').addClass('WonByPlayer' + player);
+        $('#' + bigTileId).addClass('Won').addClass('WonByPlayer' + player).removeClass('open');
         // disable all buttons in the big tile
         disableBoard(bigTileId);
         // remove other players winning marks
-        $('#' + bigTileId + ' button').removeClass('WonByPlayer' + (player === 1 ? 2 : 1));
+        $('#' + bigTileId + ' button').removeClass('player' + (player === 1 ? 2 : 1));
         // mark all tiles in this big tile as belonging to the current player
-        $('#' + bigTileId + ' button').addClass('WonByPlayer' + player);
+        $('#' + bigTileId + ' button').addClass('player' + player);
         
         // If necessary, evaluate overall board
         var bigBoard = elementsFromGame("").map(function(data) {

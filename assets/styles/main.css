@@ -15,13 +15,27 @@
   height: 40px;
 }
 
-.WonByPlayer1 { background-color: blue; }
-.WonByPlayer2 { background-color: red; }
 
-.WonByPlayer1[disabled] { background-color: blue; }
-.WonByPlayer2[disabled] { background-color: red; }
+.WonByPlayer1 {
 
-.btn-default[disabled] { background-color: gray; }
+ background-color: blue;
+ .btn[disabled] {background-color:blue; }
+
+ }
+.WonByPlayer2 { 
+  background-color: red; 
+  .btn[disabled] {background-color:red; }
+}
+
+.btn[disabled] {background-color: gray;}
+.open button.player1[disabled] { background-color: blue; }
+.open button.player2[disabled] { background-color: red; }
+
+button.player1 { background-color: blue; }
+button.player2 { background-color: red; }
+
+
+
 
 #resetBoard {
   margin: 5px;
