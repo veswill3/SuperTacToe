@@ -22,8 +22,8 @@ var resetClick = function() {
     $('.Won').removeClass('Won');
     $('.WonByPlayer1').removeClass('WonByPlayer1');
     $('.WonByPlayer2').removeClass('WonByPlayer2');
-	$('.WonByPlayer2').removeClass('player2');
-	$('.WonByPlayer2').removeClass('player2');
+	$('.btn').removeClass('player1');
+	$('.btn').removeClass('player2');
 }
 
 var cellClick = function() {
