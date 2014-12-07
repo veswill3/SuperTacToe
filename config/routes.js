@@ -32,12 +32,26 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
+  /******************* Just thinking outloud for a moment ********************
+  *                                                                          *
+  * /                           Dashboard. see stats and list of next turns  *
+  * /login                                                                   *
+  * /signup or /register        Get into the game                            *
+  * /logout                                                                  *
+  * /games                      List of games? not sure what to show here    *
+  * /game/:gameID               Where you take your turn                     *
+  * /tournaments                List of tournaments and status               *
+  * /tournament/:tournamentID   Current standings, future matchups, etc      *
+  * /users                      List of users and stats                      *
+  * /user/:userID               Info for a specific user                     *
+  * /profile or /settings       Update preferences? prob dont need this      *
+  *                                                                          *
+  ***************************************************************************/
+
   '/': {
     view: 'homepage'
   },
 
-  //'get /login': 'UserController.login'
-    
   'get /login': 'AuthController.login',
   'get /logout': 'AuthController.logout',
   'get /register': 'AuthController.register',
