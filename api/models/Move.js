@@ -8,8 +8,8 @@
 module.exports = {
 
   attributes: {
-    game     : { model: 'game' },
-    user     : { model: 'user' },
-    position : 'INTEGER'
+    game     : { model: 'game', required: true, index: true },
+    user     : { model: 'user', required: true, index: true },
+    position : { type: 'integer', required: true }
   }
 };

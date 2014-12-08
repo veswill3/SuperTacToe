@@ -8,14 +8,9 @@
 module.exports = {
 
   attributes: {
-    players: {
-        collection: 'user',
-        via: 'tournaments'
-    },
-    matchups: {
-        collection: 'game',
-        via: 'tournament'
-    }
+    name     : { type: 'string', unique: true, required: true },
+    players  : { collection: 'user', via: 'tournaments', required: true },
+    matchups : { collection: 'game', via: 'tournament' }
   }
 };
 

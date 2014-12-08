@@ -7,13 +7,8 @@ var User = {
     email     : { type: 'email',  unique: true },
     passports : { collection: 'Passport', via: 'user' },
 
-    tournaments: {
-        collection: 'tournament',
-        via: 'players'
-    },
-    games: {
-        collection: 'game',
-    }
+    tournaments : { collection: 'tournament', via: 'players' },
+    games       : { collection: 'game', via: 'players' }
   }
 };
 
