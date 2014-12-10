@@ -7,7 +7,6 @@
 $ cd SuperTacToe
 # Update dependencies
 $ npm install
-$ bower install
 # Start the server
 $ sails lift
 ```
