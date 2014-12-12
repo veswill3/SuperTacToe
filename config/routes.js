@@ -64,6 +64,8 @@ module.exports.routes = {
   'get /auth/:provider/callback': 'AuthController.callback',
   'get /auth/:provider/:action': 'AuthController.callback',
 
+  'post /game/:game/takemyturn': 'GameController.takeMyTurn',
+
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *

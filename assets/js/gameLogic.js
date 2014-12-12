@@ -27,10 +27,19 @@ var resetClick = function() {
 }
 
 var cellClick = function() {
-    
+
     // Get current element id
     var elementId = this.id;
-    
+
+    // for testing on the server
+    $.ajax({
+        url: "/game/2/takemyturn",
+        type: "POST",
+        data: {
+            elementID: elementId
+        },
+    });
+
     // disable the button
     $('#'+elementId).attr('disabled',1);
     
