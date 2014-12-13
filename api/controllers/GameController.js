@@ -14,10 +14,8 @@ module.exports = {
    */
   takeMyTurn: function (req, res) {
     var user = req.user;
-    if (!user) {
-        console.log('error: You are not logged in.');
-        return res.json({error: 'You are not logged in.'});
-    }
+    if (!user)
+        return res.forbidden('You are not logged in.');
     
     var clientTileID = req.body.elementID;
     var supertile = parseInt(clientTileID.slice(0,1)) + (clientTileID.slice(1,2) * 3) + 1;
@@ -28,6 +26,9 @@ module.exports = {
     .populate('players')
     // .populate('moves')  //should I use this instead of finding the move below?
     .exec(function (err,game) {
+
+        if (!game)
+            return res.badRequest('Invalid game ID of `' + req.param('game') + '`')
 
         //quick check: is this user even in the game?
         var found = game.players.some(function (player) {

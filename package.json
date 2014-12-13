@@ -38,5 +38,12 @@
     "url": "git://github.com/ubuntu/supertactoe.git"
   },
   "author": "ubuntu",
-  "license": ""
+  "license": "",
+  "devDependencies": {
+    "assert": "^1.1.2",
+    "grunt-mocha-test": "^0.12.4",
+    "mocha": "^2.0.1",
+    "sinon": "^1.12.2",
+    "supertest": "^0.15.0"
+  }
 }
