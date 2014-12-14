@@ -1,8 +1,9 @@
-var AboutController = require('../../api/controllers/GameController'),
+var AboutController = require('../../../api/controllers/GameController'),
+    userHelper = require('../../helpers/user.helper.js'),
     sinon = require('sinon'),
     assert = require('assert'),
-    request = require('supertest'),
-    Sails = require('sails');
+    Sails = require('sails'),
+    agent;
 
 before(function(done) {
   this.timeout(10000); //sails takes longer to lift
@@ -13,7 +14,11 @@ before(function(done) {
   }, function(err, sails) {
     if (err) return done(err);
     // here you can load fixtures, etc.
-    done(err, sails);
+    app = sails.hooks.http.app;
+    userHelper.registerAndLogin(function (u, a) {
+        agent = a;
+        done(err, sails);
+    });
   });
 });
 
@@ -27,19 +32,18 @@ describe('The Game Controller', function () {
     describe('when posting to takemyturn', function () {
 
         it ('should return an error when posting to an invalid game', function (done) {
-            // currently failes, need to login first
-            request(sails.hooks.http.app)
-              .post('/game/9876/takemyturn') //not a valid game record
-              .send({elementID: '0000'})
-              .expect(400, 'Invalid game ID of `8976`', done);
+            agent.post('/game/9876/takemyturn') //not a valid game record
+            .send({elementID: '0000'})
+            .expect(400, 'Invalid game ID of `9876`', done);
         });
 
         describe('the player', function () {
             it ('should be logged in', function (done) {
-                request(sails.hooks.http.app)
-                  .post('/game/1/takemyturn')
-                  .send({elementID: '0000'})
-                  .expect(403, 'You are not logged in.', done);
+                userHelper.logout(agent, function () {
+                    agent.post('/game/1/takemyturn')
+                    .send({elementID: '0000'})
+                    .expect(403, 'You are not logged in.', done);
+                });
             });
             it ('should be a player in the game');
             it ('should only get first move if they are player 1');
@@ -56,6 +60,7 @@ describe('The Game Controller', function () {
         describe ('the new game state', function () {
             it ('should indicate player as winner of supertile if they won the subgame');
             it ('should indicate player as winner if winning 3 supertiles in tictactoe fashion');
+            it ('should include a new move record');
         })
 
     })

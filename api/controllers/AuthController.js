@@ -69,7 +69,7 @@ var AuthController = {
    */
   logout: function (req, res) {
     req.logout();
-    res.redirect('/');
+    res.ok();
   },
 
   /**
@@ -161,9 +161,8 @@ var AuthController = {
           return tryAgain();
         }
 
-        // Upon successful login, send the user to the homepage were req.user
-        // will available.
-        res.redirect('/');
+        // Upon successful login, pass back info about the user
+        res.json(user);
       });
     });
   },
