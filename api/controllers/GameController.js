@@ -14,12 +14,11 @@ module.exports = {
    */
   takeMyTurn: function (req, res) {
     var user = req.user;
+    var supertile = req.body.supertile;
+    var subtile = req.body.subtile;
+    
     if (!user)
         return res.forbidden('You are not logged in.');
-    
-    var clientTileID = req.body.elementID;
-    var supertile = parseInt(clientTileID.slice(0,1)) + (clientTileID.slice(1,2) * 3) + 1;
-    var subtile = parseInt(clientTileID.slice(2,3)) + (clientTileID.slice(3,4) * 3) + 1;
 
     Game.findOne()
     .where({ id: req.param('game') })

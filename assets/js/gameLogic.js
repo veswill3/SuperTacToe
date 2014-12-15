@@ -30,13 +30,16 @@ var cellClick = function() {
 
     // Get current element id
     var elementId = this.id;
-
+    
     // for testing on the server
+    var supertile = parseInt(elementId.slice(0,1)) + (elementId.slice(1,2) * 3) + 1;
+    var subtile = parseInt(elementId.slice(2,3)) + (elementId.slice(3,4) * 3) + 1;
     $.ajax({
         url: "/game/2/takemyturn",
         type: "POST",
         data: {
-            elementID: elementId
+            supertile: supertile,
+            subtile: subtile
         },
     });
 
