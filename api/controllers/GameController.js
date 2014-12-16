@@ -33,10 +33,8 @@ module.exports = {
         var found = game.players.some(function (player) {
             if (player.id == user.id) { return true };
         });
-        if (!found) {
-            console.log('error: You are not playing in this game.');
-            return res.json({error: 'You are not playing in this game.'});
-        }
+        if (!found)
+            return res.forbidden('You are not playing in this game.');
 
         //get the last move for this game and make sure the same player is not moving twice in a row
         Move.findOne()
@@ -45,10 +43,9 @@ module.exports = {
         .limit(1)
         .exec(function (err,lastMove) {
             //first move, so only player 1 can move
-            if (!lastMove && game.players[0].id != user.id) {
-                console.log('error: You dont get first move this game.');
-                return res.json({error: 'You dont get first move this game.'});
-            }
+            if (!lastMove && game.players[0].id != user.id)
+                return res.forbidden('You dont get first move this game.');
+            
             //make sure that this user did not just go
             if (lastMove && lastMove.user == user.id) {
                 // console.log('error: You may not move twice in a row.');
@@ -61,14 +58,10 @@ module.exports = {
                     user = game.players[0].id;
                 }
             }
-            console.log('Creating a move record for user ' + user + ' to keep track');
+            console.log('Creating a move record for user ' + user.id + ' to keep track');
             Move.create({game: game, user: user, supertile: supertile, subtile: subtile}).exec(function (err,move) {});
         });
     });
-
-    // return res.json({
-    //   todo: 'takeMyTurn() is not implemented yet!'
-    // });
   }
 
 };

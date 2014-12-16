@@ -1,5 +1,29 @@
 request = require('supertest');
 
+module.exports.generate = function(cb){
+    var user = {
+        username: 'TestUser ' + Date.now(),
+        email: 'TestUser' + Date.now() + '@email.com'
+    };
+
+    this.create(user, 'Pa$sw0Rd', cb);
+};
+
+module.exports.create = function(user, password, cb){
+    User.create(user, function(err, user){
+        if(err) console.log(err);
+        
+        Passport.create({
+            protocol: 'local',
+            password: password,
+            user: user.id
+        }, function(err, passport){
+            if(err) console.log(err);
+            cb(user, password);
+        });
+    });
+};
+
 module.exports.registerAndLogin = function(cb){
     var user, app, agent, pp;
 
@@ -48,22 +72,18 @@ module.exports.registerAndLogin = function(cb){
             .end(function(err, res){
                 if(err){
                     console.log('An error occurred logging the user in. err=' + err);
-                    console.log(err);
                 }
 
                 if(res.status !== 200){
                     console.log('An error occured logging the user in. res.status=' + res.status);
-                    console.log(res);
                 }
                 callback(null);
             });
         }], function(err){
             if(err){
-                console.log('An error occured in user.helper');
+                console.log('An error occured in user.helper err=' + err);
                 console.log(err);
             }
-
-            console.log('you should see this');
             cb(user, agent);
         });
 };
