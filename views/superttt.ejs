@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row col-md-offset-2"><h1>SuperTacToe</h1></div>
-  <div>  <!-- put in ng controller gameController here -->
+  <div ng-controller="gameController">
   <div class="row col-md-offset-2">
 		<div id="gameboard">
 			{{test}}
@@ -12,10 +12,12 @@
 					<div id="<%= k %>" class="SmallRow">
 					  <% for(var l=0; l<3; l++) { %>
 						<button id="<%= ("" + i + j + k + l) %>" type="button" class="btn btn-default SmallTile" 
-						ng-click="clickTile(<%= ("" + i + j + k + l) %>)" 
-						ng-class="classUpdate(<%= ("" + i + j + k + l) %>)"
-						ng-disabled="disableCheck(<%= ("" + i + j + k + l) %>)"
-						></button>
+						ng-click="clickTile('<%= ("" + i + j + k + l) %>')" 
+						ng-class="classUpdate('<%= ("" + i + j + k + l) %>')"
+						ng-disabled="disableCheck('<%= ("" + i + j + k + l) %>')"
+						>
+						{{tileMarker['<%= ("" + i + j + k + l) %>']}}
+						</button>
 					  <% } %>
 					</div>
 				  <% } %>
