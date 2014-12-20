@@ -3,7 +3,7 @@ var winner = 0
 
 $(document).ready(function() {
     // tile clicked
-    $('.SmallTile').click(cellClick);
+    //$('.SmallTile').click(cellClick);
     // reset clicked
     $('#resetBoard').click(resetClick);
 

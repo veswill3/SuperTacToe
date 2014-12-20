@@ -1,31 +1,38 @@
 <div class="container">
   <div class="row col-md-offset-2"><h1>SuperTacToe</h1></div>
+  <div ng-controller="gameController as game">
   <div class="row col-md-offset-2">
-    <div id="gameboard">
-      <% for(var i=0; i<3; i++) { %>
-        <div id="<%= i %>" class="BigRow">
-          <% for(var j=0; j<3; j++) { %>
-            <div id="<%= "" + i + j %>" class="BigTile open">
-              <% for(var k=0; k<3; k++) { %>
-                <div id="<%= k %>" class="SmallRow">
-                  <% for(var l=0; l<3; l++) { %>
-                    <button id="<%= ("" + i + j + k + l) %>" type="button" class="btn btn-default SmallTile"></button>
-                  <% } %>
-                </div>
-              <% } %>
-            </div>
-          <% } %>
-        </div>
-      <% } %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="h2 col-md-2 col-md-offset-2 col-xs-2">
-        <button id="resetBoard" type="button" class="btn btn-default">Reset Board</button>
-        <button id="playRandom" type="button" class="btn btn-default">Play Random</button>
-    </div>
-    <div class="col-md-3 col-xs-3 h2">
-        Player: <span id="player">1</span>
-    </div>
+		<div id="gameboard">
+			{{test}}
+		  <% for(var i=0; i<3; i++) { %>
+			<div id="<%= i %>" class="BigRow">
+			  <% for(var j=0; j<3; j++) { %>
+				<div id="<%= "" + i + j %>" class="BigTile open">
+				  <% for(var k=0; k<3; k++) { %>
+					<div id="<%= k %>" class="SmallRow">
+					  <% for(var l=0; l<3; l++) { %>
+						<button id="<%= ("" + i + j + k + l) %>" type="button" class="btn btn-default SmallTile" 
+						ng-click="clickTile(<%= ("" + i + j + k + l) %>)" 
+						ng-class="classUpdate(<%= ("" + i + j + k + l) %>)"
+						ng-disabled="disableCheck(<%= ("" + i + j + k + l) %>)"
+						></button>
+					  <% } %>
+					</div>
+				  <% } %>
+				</div>
+			  <% } %>
+			</div>
+		  <% } %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="h2 col-md-2 col-md-offset-2 col-xs-2">
+			<button id="resetBoard" type="button" class="btn btn-default">Reset Board</button>
+			<button id="playRandom" type="button" class="btn btn-default">Play Random</button>
+		</div>
+		<div class="col-md-3 col-xs-3 h2">
+			Player: <span id="player">{{player}}</span>
+		</div>
+	</div>
   </div>
 </div>
