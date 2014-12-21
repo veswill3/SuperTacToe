@@ -73,16 +73,38 @@ gameApp.controller('gameController',['$scope', function($scope) {
 		
 		// Update the rest of the board for the opponents turn
 		// disable the entire board
+		switchEnabled(true,$scope);
+		
 		
 		
 		// Determine new sub-game
-		
+		var nextGame = id.slice(2,4);
 		// Did player send their opponent to an already won board?
-		  // If yes, enable all
+		if ($scope.bigTile[nextGame]) {
+		// If yes, enable all
+			switchEnabled(false,$scope);
+		}
+		  
 		//  Else - was board already full?
-		  // If yes, enable all
+		var count = 0;
+		for (var i = 0; i < 3; i++) {
+			for (var j = 0; j < 3; j++) {
+				if ($scope.tileMarker[""+nextGame+i+j]) {
+					count += 1;
+				}
+		}}
+		if (count === 9) {
+			// If yes, enable all
+			switchEnabled(false,$scope);
+		}
+		  
 		//  Else, just enable new sub-game's board
-		
+		for (var i = 0; i < 3; i++) {
+			for (var j = 0; j < 3; j++) {
+				if (!$scope.tileMarker[""+nextGame+i+j]) {
+					$scope.disabled[""+nextGame+i+j] = false;
+				}
+		}}
 	};
 	
 	// Holds classes for each tile to do coloring.
@@ -129,3 +151,15 @@ var compareThree = function(one,two,three) {
         return "";
     return one == two && two == three;
 };
+
+var switchEnabled = function(status,$scope) {
+	for (var i = 0; i < 3; i++) {
+			for (var j = 0; j < 3; j++) {
+				if (!$scope.bigTile[""+i+j]) {
+				for (var k = 0; k < 3; k++) {
+					for (var l = 0; l < 3; l++) {
+					 if (!$scope.tileMarker[""+i+j+k+l])
+						$scope.disabled[""+i+j+k+l] = status;
+				}
+		}}}}
+}
