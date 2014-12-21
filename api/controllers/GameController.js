@@ -22,18 +22,13 @@ module.exports = {
 
     Game.findOne()
     .where({ id: req.param('game') })
-    .populate('players')
     // .populate('moves')  //should I use this instead of finding the move below?
     .exec(function (err,game) {
 
         if (!game)
             return res.badRequest('Invalid game ID of `' + req.param('game') + '`')
 
-        //quick check: is this user even in the game?
-        var found = game.players.some(function (player) {
-            if (player.id == user.id) { return true };
-        });
-        if (!found)
+        if ((game.playerOne != user.id) && (game.playerTwo != user.id))
             return res.forbidden('You are not playing in this game.');
 
         //get the last move for this game and make sure the same player is not moving twice in a row
@@ -43,23 +38,23 @@ module.exports = {
         .limit(1)
         .exec(function (err,lastMove) {
             //first move, so only player 1 can move
-            if (!lastMove && game.players[0].id != user.id)
+            if (!lastMove && game.playerOne != user.id)
                 return res.forbidden('You dont get first move this game.');
             
             //make sure that this user did not just go
             if (lastMove && lastMove.user == user.id) {
-                // console.log('error: You may not move twice in a row.');
-                // return res.json({error: 'You may not move twice in a row.'})
+                return res.forbidden('You may not move twice in a row.');
 
                 //for now, for testing, just flip the user to the other user so we can play on the same screen
-                if (game.players[0].id == user.id) {
-                    user = game.players[1].id;
-                } else if (game.players[1].id == user.id) {
-                    user = game.players[0].id;
+                if (game.playerOne == user.id) {
+                    user = game.playerTwo;
+                } else if (game.playerTwo == user.id) {
+                    user = game.playerOne;
                 }
             }
             console.log('Creating a move record for user ' + user.id + ' to keep track');
             Move.create({game: game, user: user, supertile: supertile, subtile: subtile}).exec(function (err,move) {});
+            return res.ok();
         });
     });
   }

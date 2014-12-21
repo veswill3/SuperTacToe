@@ -8,7 +8,7 @@ var User = {
     passports : { collection: 'Passport', via: 'user' },
 
     tournaments : { collection: 'tournament', via: 'players' },
-    games       : { collection: 'game', via: 'players' }
+    games       : { collection: 'game' }
   }
 };
 

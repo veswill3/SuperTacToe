@@ -9,7 +9,8 @@ module.exports = {
 
   attributes: {
     tournament : { model: 'tournament' },
-    players    : { collection: 'user', via: 'games', required: true },
+    playerOne  : { model: 'user', required: true },
+    playerTwo  : { model: 'user', required: true },
     moves      : { collection: 'move', via: 'game' }
   }
 };
