@@ -1,10 +1,7 @@
-var gameApp = angular.module('gameApp', []);
+(function () {
 
-gameApp.controller('GameApp',function($scope) {
-	
-});
-
-gameApp.controller('gameController',['$scope', function($scope) {
+angular.module('superTacToe')
+.controller('GameController',['$scope', function($scope) {
 	
 	// Initialize
 	$scope.classes = {};  // eventually pull this stuff from the sails data model
@@ -163,3 +160,5 @@ var switchEnabled = function(status,$scope) {
 				}
 		}}}}
 }
+
+}());
