@@ -1,32 +1,75 @@
 (function () {
+	// 'use strict';
 
 angular.module('superTacToe')
 .controller('GameController',['$scope', function($scope) {
+
+	// game model:
+	// 	winner
+	// 	currentPlayer
+	// 	superTile[]
+	// 		ownedBy
+	// 		subTile[]
+	// 			enabled
+	// 			ownedBy
+
+	this.winner = '';
+	this.tournament = 'Tournament of destruction';
+	this.currentPlayer = 1;
+	this.playerOne = "Carl";
+	this.playerTwo = "Vesper";
+	this.superTile = [];
+
+	var superTileAry = [];
+	var bigTile = {};
+	var subTileAry = [];
+	var subTile = {};
+	// initialize the 9 supertiles
+	for (var i = 0; i < 9; i++) {
+		bigTile = {
+			ownedBy: '',
+			subTile: []
+		};
+		// initialize the 9 subtiles
+		subTileAry = [];
+		for (var j = 0; j < 9; j++) {
+			subTile = {
+				enabled: true,
+				ownedBy: ''
+			};
+			subTileAry.push(subTile);
+		};
+		bigTile.subTile = subTileAry;
+		superTileAry.push(bigTile);
+	};
+
+	this.superTile = superTileAry;
+
+	/// vespers changes above ///	
 	
 	// Initialize
 	$scope.classes = {};  // eventually pull this stuff from the sails data model
 	$scope.disabled = {};
-	$scope.player = 1;
 	$scope.tileMarker = {};
-	$scope.bigTile = {
-	};
+	$scope.bigTile = {};
 	
 	// Tile is clicked
-	$scope.clickTile = function(id) {
+	this.clickTile = function(id) {
 		
 		$scope.disabled[id] = true;
-		$scope.classes[id] = 'player'+$scope.player;
-		var player = $scope.player;
+		var player = this.currentPlayer;
+		$scope.classes[id] = 'player'+player;
 		
 		// Change player and update tile to X or O
-		if ($scope.player == 1) {
-			$scope.player = 2;
+		if (player == 1) {
+			player = 2;
 			$scope.tileMarker[id] = 'X';
 		}
 		else {
-			$scope.player = 1;
+			player = 1;
 			$scope.tileMarker[id] = 'O';
 		}
+		this.currentPlayer = player;
 		
 		// Evaluate sub-game to see if it's full or won
 		var bigTileId = id.slice(0,2);
@@ -105,12 +148,12 @@ angular.module('superTacToe')
 	};
 	
 	// Holds classes for each tile to do coloring.
-	$scope.classUpdate = function(id) {
+	this.classUpdate = function(id) {
 		return $scope.classes[id];
 	};
 	
 	// Holds disabled status of each tile
-	$scope.disableCheck = function(id) {
+	this.disableCheck = function(id) {
 		if ($scope.disabled[id])
 			return true;
 		else

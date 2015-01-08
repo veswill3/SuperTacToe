@@ -1,9 +1,27 @@
-<div class="container">
-  <div class="row col-md-offset-2"><h1>SuperTacToe</h1></div>
-  <div ng-controller="GameController as game">
-  <div class="row col-md-offset-2">
+<div ng-controller="GameController as game">
+
+	<div class="row">
+		<a href="#">{{game.tournament}}</a>
+		>
+		<a href="#">{{game.playerOne}}</a>
+		vs
+		<a href="#">{{game.playerTwo}}</a>
+	</div>
+
+	<div class="row">
+		<h4>
+			Waiting on
+			<span ng-if="game.currentPlayer == 1">
+				{{game.playerOne}}
+			</span>
+			<span ng-if="game.currentPlayer == 2">
+				{{game.playerTwo}}
+			</span>
+		</h4>
+	</div>
+
+	<div class="row">
 		<div id="gameboard">
-			{{test}}
 		  <% for(var i=0; i<3; i++) { %>
 			<div id="<%= i %>" class="BigRow">
 			  <% for(var j=0; j<3; j++) { %>
@@ -12,9 +30,9 @@
 					<div id="<%= k %>" class="SmallRow">
 					  <% for(var l=0; l<3; l++) { %>
 						<button id="<%= ("" + i + j + k + l) %>" type="button" class="btn btn-default SmallTile" 
-						ng-click="clickTile('<%= ("" + i + j + k + l) %>')" 
-						ng-class="classUpdate('<%= ("" + i + j + k + l) %>')"
-						ng-disabled="disableCheck('<%= ("" + i + j + k + l) %>')"
+						ng-click="game.clickTile('<%= ("" + i + j + k + l) %>')" 
+						ng-class="game.classUpdate('<%= ("" + i + j + k + l) %>')"
+						ng-disabled="game.disableCheck('<%= ("" + i + j + k + l) %>')"
 						>
 						{{tileMarker['<%= ("" + i + j + k + l) %>']}}
 						</button>
@@ -27,14 +45,13 @@
 		  <% } %>
 		</div>
 	</div>
+
 	<div class="row">
-		<div class="h2 col-md-2 col-md-offset-2 col-xs-2">
-			<button id="resetBoard" type="button" class="btn btn-default">Reset Board</button>
-			<button id="playRandom" type="button" class="btn btn-default">Play Random</button>
-		</div>
-		<div class="col-md-3 col-xs-3 h2">
-			Player: <span id="player">{{player}}</span>
-		</div>
+		<!-- <span class="col-md-4"> -->
+			<button class="btn btn-default" type="button" id="resetBoard">Reset Board</button>
+			<button class="btn btn-default" type="button" id="playRandom">Play Random</button>
+		<!-- </span> -->
+		<a href="#" class="btn btn-primary col-md-offset-1">Confirm</a>
 	</div>
-  </div>
+
 </div>
