@@ -2,19 +2,29 @@
 	// 'use strict';
 
 angular.module('superTacToe')
-.controller('GameController',['$scope', function($scope) {
+.controller('GameController',['$scope', '$rootScope', function($scope, $rootScope) {
 
 	// game model:
 	// 	winner
 	// 	currentPlayer
 	// 	superTile[]
+	//		enabled
 	// 		ownedBy
 	// 		subTile[]
 	// 			enabled
 	// 			ownedBy
 
+	var game = this;
+
+	$scope.$watch(function() {
+	  return $rootScope.currentGame;
+	}, function( newval ) {
+	  game.gameID = newval;
+	}, true);
+
+	// this.gameID = $rootScope.currentGame;
 	this.winner = '';
-	this.tournament = 'Tournament of destruction';
+	$scope.tournament = 'Tournament of destruction';
 	this.currentPlayer = 1;
 	this.playerOne = "Carl";
 	this.playerTwo = "Vesper";

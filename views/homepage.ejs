@@ -16,7 +16,7 @@
       <div ng-controller="GameListController as gameList">
         <ul class="nav nav-pills nav-stacked collapse navbar-collapse" id="game-list">
           <li role="presentation" ng-repeat="game in gameList.games">
-            <a href="#">{{game.name}}</a>
+            <a href="#" ng-click="gameList.changeGame(game.gameId)" >{{game.name}}</a>
           </li>
         </ul>
       </div>
