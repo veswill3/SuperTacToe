@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>SuperTacToe</title>
+  </head>
+  <body>
+    <div id="container">
+
+      <h1>SuperTacToe</h1>
+
+      <div id="board"></div>
+
+      <h2 id="turn-signal"></h2>
+
+      <p id="link-message" style="display: none;">
+        Opponent not connected. Send them this link:
+        <input type="text" id="link">
+      </p>
+
+      <button id="start-over" style="display: none;">Start Over</button>
+
+      <h2>How to play</h2>
+      <p>
+        SuperTacToe is a nested game of tic-tac-toe where each big tile contains a small game of tic-tac-toe inside of it. The game is won when someone wins the big game. In order to win tiles of the big game, you must win the small game inside of it.
+      </p>
+      <p>
+        You cannot move just anywhere though - You can only make a move in the big tile corresponding to the previous move's little tile. Similarly, your move will send your opponent to a specific big tile that corresponds to your move. If someone is sent to a big tile that is already won or full, they can make a move in any other open tile.
+      </p>
+      <p>
+        If that sounds confusing, play a practice game and it will make sense.
+      </p>
+
+    </div>
+    <script type="text/javascript" src="main.js"></script>
+  </body>
+</html>

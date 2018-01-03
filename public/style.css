@@ -1,0 +1,65 @@
+body {
+  font-family: sans-serif;
+}
+
+button {
+  background: none !important;
+  color: blue;
+  border: none;
+  padding: 0 !important;
+  font: inherit;
+  border-bottom: 1px solid blue;
+  cursor: pointer;
+}
+
+#container {
+  width: 90vw;
+  max-width: 400px;
+  margin: auto;
+}
+
+#link {
+  width: 100%;
+}
+
+#turn-signal.p1 { color: #3f51b5; }
+#turn-signal.p2 { color: #4caf50; }
+
+#board {
+  height: 90vw;
+  max-height: 400px;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-gap: 5%;
+}
+#board.p1-winner { background-color: #3f51b569; }
+#board.p2-winner { background-color: #4caf5075; }
+
+/* super tile */
+#board div {
+  padding: 5%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-gap: 5%;
+  border-radius: 15%;
+}
+#board.p1-turn div.playable { border: 5px dashed #3f51b5; }
+#board.p2-turn div.playable { border: 5px dashed #4caf50; }
+#board div.p1 { background-color: #3f51b580; }
+#board div.p2 { background-color: #4caf5080; }
+#board div.full {
+  background-color: #b7b7b7;
+  opacity: 0.35;
+}
+
+/* sub tile */
+#board div div {
+  background-color: #e8e8e8;
+  border-radius: 50%;
+}
+#board div div.p1 { background-color: #3f51b5; }
+#board div div.p2 { background-color: #4caf50; }
+#board div div.last { border: 3px dashed #ff008a; }

@@ -1,50 +1,33 @@
 {
-  "dependencies": {
-    "async": "^0.9.0",
-    "bcryptjs": "^2.1.0",
-    "ejs": "~1.0.0",
-    "grunt": "0.4.5",
-    "grunt-bower-task": "^0.4.0",
-    "grunt-contrib-clean": "~0.6.0",
-    "grunt-contrib-coffee": "~0.12.0",
-    "grunt-contrib-concat": "~0.5.0",
-    "grunt-contrib-copy": "~0.7.0",
-    "grunt-contrib-cssmin": "~0.10.0",
-    "grunt-contrib-jst": "~0.6.0",
-    "grunt-contrib-less": "0.12.0",
-    "grunt-contrib-uglify": "~0.6.0",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt-sails-linker": "~0.9.5",
-    "grunt-sync": "~0.2.2",
-    "include-all": "~0.1.6",
-    "passport": "^0.2.1",
-    "passport-local": "^1.0.0",
-    "rc": "~0.5.4",
-    "sails": "~0.10.5",
-    "sails-disk": "~0.10.5",
-    "validator": "^3.22.2"
-  },
   "name": "supertactoe",
-  "private": true,
-  "version": "0.0.0",
-  "description": "a Sails application",
-  "keywords": [],
+  "version": "1.0.0",
+  "description": "super tic-tac-toe",
+  "main": "server.js",
   "scripts": {
-    "start": "node app.js",
-    "debug": "node debug app.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "lint": "eslint ./"
   },
-  "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/ubuntu/supertactoe.git"
+    "url": "git+https://github.com/veswill3/SuperTacToe.git"
   },
-  "author": "ubuntu",
-  "license": "",
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/veswill3/SuperTacToe/issues"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "ws": "^3.3.3"
+  },
   "devDependencies": {
-    "assert": "^1.1.2",
-    "grunt-mocha-test": "^0.12.4",
-    "mocha": "^2.0.1",
-    "sinon": "^1.12.2",
-    "supertest": "^0.15.0"
+    "babel-eslint": "^8.0.3",
+    "eslint": "^4.13.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1",
+    "nodemon": "^1.14.0"
   }
 }
