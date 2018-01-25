@@ -2,10 +2,11 @@
   "name": "supertactoe",
   "version": "1.0.0",
   "description": "super tic-tac-toe",
-  "main": "server.js",
+  "homepage": "https://veswill3.github.io/SuperTacToe",
   "scripts": {
-    "deploy": "cd client && npm run deploy",
-    "lint": "eslint ./"
+    "lint": "eslint ./",
+    "predeploy": "cd client && npm run build",
+    "deploy": "gh-pages -d client/build"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,8 @@
   },
   "dependencies": {
     "firebase-admin": "^5.8.0",
-    "firebase-functions": "^0.8.0"
+    "firebase-functions": "^0.8.0",
+    "gh-pages": "^1.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.3",
