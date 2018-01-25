@@ -4,8 +4,11 @@ module.exports = {
   "rules": {
     "no-console": "off",
     "no-alert": "off",
-    "no-underscore-dangle": [2, { "allow": ["_id"] }],
-    "no-param-reassign": ["error", { "props": false }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "prefer-promise-reject-errors": [0],
+    "no-param-reassign": ["error", { "props": false }],
+    "react/no-array-index-key": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
   },
   "env": {
     "browser": true,
