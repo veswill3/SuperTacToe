@@ -16,7 +16,8 @@ const NewGameButton = () => (
       try {
         const { id: newId } = await createGame(token);
         localStorage.setItem(newId, token);
-        window.location = `${window.location.origin}/?id=${encodeURIComponent(newId)}`;
+        window.location =
+          `${window.location.origin}${window.location.pathname}?id=${encodeURIComponent(newId)}`;
       } catch (error) {
         console.log(error);
       }
