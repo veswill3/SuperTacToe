@@ -103,15 +103,20 @@ class App extends Component {
           <div>
             {game && game.status === 'joining' &&
               <div>
-                <p>
-                  You need a friend to play. Send them a link to this page.
-                </p>
+                <div>Now you need a friend to play against.</div>
                 <CopyToClipboard
                   text={`Join me for a game of SuperTacToe at ${window.location.href}`}
                   onCopy={() => this.setState({ copied: true })}
                 >
-                  <button>{copied ? 'Linked copied' : 'Click here to copy the link'}</button>
+                  <button>
+                    {copied ?
+                      'Copied. Now paste it into an email or text.'
+                      :
+                      'Click here to copy the link.'
+                    }
+                  </button>
                 </CopyToClipboard>
+                <div>When they join this message will dissapear.</div>
               </div>
             }
             <h2 className={yourRoleClass}>{yourRoleText}</h2>
@@ -122,7 +127,7 @@ class App extends Component {
             />
             {!isGameOver && role !== 'spectator' &&
               <h2 className={`p${whosTurn}`}>
-                {yourTurn ? 'Your Turn' : 'Wait on opponent...'}
+                {yourTurn ? 'Your Turn' : 'Waiting for opponent...'}
               </h2>
             }
             {isGameOver &&
